@@ -44,11 +44,10 @@
     /* HEADER INFO */
     .top-info {
         display: flex;
-        gap: 25px;
-        font-size: 16px; /* diperbesar */
+        gap: 28px;
         margin-left: 25px;
         margin-top: -10px;
-        font-weight: 600;
+        font-weight: 540;
     }
 
     /* MODE BUTTON */
@@ -168,7 +167,10 @@
        JAM REALTIME
     =========================== */
     function updateJam() {
+        let teks = document.getElementById("jam")
+        teks.style.color = "blue";
         const now = new Date();
+        
         document.getElementById("jam").textContent =
             now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
     }
@@ -180,25 +182,33 @@
     =========================== */
     function updateCuaca(lat, lon) {
         // Contoh cuaca static
-        document.getElementById("cuaca").textContent = "Cerah Berawan";
-        document.getElementById("temperature").textContent = "27°C";
+        document.getElementById("cuaca").textContent = "Cuaca Cerah";
+        document.getElementById("temperature").textContent = "32°C";
+        let celcius = document.getElementById("temperature")
+        celcius.style.color = "orange";
     }
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(pos => {
+   if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        pos => {
             const lat = pos.coords.latitude.toFixed(2);
             const lon = pos.coords.longitude.toFixed(2);
 
-            document.getElementById("lokasi").textContent = `Lokasi: ${lat}, ${lon}`;
+            document.getElementById("lokasi").textContent =
+                `Lokasi: ${lat}, ${lon}`;
+
             updateCuaca(lat, lon);
-        }, () => {
-            document.getElementById("lokasi").textContent = "Lokasi tidak diizinkan";
-        });
-    } else {
-        document.getElementById("lokasi").textContent = "Lokasi tidak didukung";
-    }
+        },
+        () => {
+            document.getElementById("lokasi").textContent = "[lokasi...]";
+            updateCuaca(); // ← INI KUNCI NYA
+        }
+    );
+} else {
+    updateCuaca();
+}
+
     </script>
 
 </body>
 </html>
-
