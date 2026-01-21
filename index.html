@@ -89,3 +89,14 @@
     <script src="js/clock.js"></script>
 </body>
 </html>
+
+<!-- masuk ke tampilan mobile -->
+<script>
+// Deteksi jika user menggunakan mobile
+if (window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    // Redirect ke versi mobile jika belum di mobile version
+    if (!window.location.href.includes('mobile')) {
+        window.location.href = 'index-mobile.html';
+    }
+}
+</script>
