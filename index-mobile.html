@@ -8,7 +8,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- CSS Mobile (disederhanakan dari CSS Anda) -->
     <style>
         /* =======================
            RESET & GLOBAL
@@ -17,63 +16,59 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: Arial, sans-serif;
         }
         
         body {
-            background: #f5f5f5;
+            background: #f3f3f3;
             color: #333;
             max-width: 100%;
             overflow-x: hidden;
             transition: background-color 0.3s, color 0.3s;
         }
         
-        /* Mode Gelap */
+        /* Mode Gelap (sesuai style.css Anda) */
         .dark-mode {
-            background: #121212 !important;
-            color: #e0e0e0 !important;
+            background: #1b1b1b !important;
+            color: white !important;
         }
         
         .dark-mode .phone-container {
             background: #1e1e1e !important;
         }
         
-        .dark-mode .mobile-header {
+        .dark-mode .mobile-header,
+        .dark-mode .news-card {
             background: #2a2a2a !important;
-            border-bottom-color: #444 !important;
-        }
-        
-        .dark-mode .mobile-nav {
-            background: #b30000 !important;
-        }
-        
-        .dark-mode .news-item {
-            background: #2a2a2a !important;
-            box-shadow: 0 2px 8px rgba(255,255,255,0.05) !important;
-        }
-        
-        .dark-mode .section-title,
-        .dark-mode .news-content h3,
-        .dark-mode .news-meta {
-            color: #e0e0e0 !important;
-        }
-        
-        .dark-mode .news-meta .kategori-badge {
-            background: #e60000 !important;
             color: white !important;
         }
         
-        .dark-mode .detail-content {
-            background: #1e1e1e !important;
+        .dark-mode .logo-mobile .red {
+            color: white !important;
         }
         
-        .dark-mode .bottom-nav {
-            background: #1e1e1e !important;
-            border-top-color: #444 !important;
+        .dark-mode .logo-mobile span {
+            color: white !important;
+        }
+        
+        .dark-mode .navbar-mobile {
+            background: #8B0000 !important;
+        }
+        
+        .dark-mode .search-box input {
+            background: #333 !important;
+            color: #e0e0e0 !important;
+            border-color: #555 !important;
+        }
+        
+        .dark-mode .info-bar {
+            background: #222 !important;
+            border-color: #444 !important;
         }
         
         /* =======================
            PHONE CONTAINER
+           (mirip desktop layout)
         ======================= */
         .phone-container {
             width: 100%;
@@ -82,68 +77,36 @@
             min-height: 100vh;
             background: white;
             position: relative;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
         
         /* =======================
-           STATUS BAR
-        ======================= */
-        .status-bar {
-            height: 50px;
-            background: #000;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .dark-mode .status-bar {
-            background: #000;
-        }
-        
-        .status-time {
-            font-weight: bold;
-        }
-        
-        .status-icons {
-            display: flex;
-            gap: 8px;
-        }
-        
-        /* =======================
-           HEADER MOBILE
+           HEADER - Desktop Style untuk Mobile
+           (sesuai header.css Anda)
         ======================= */
         .mobile-header {
-            padding: 15px;
+            background: #fff;
+            padding: 15px 25px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #eee;
-            background: white;
+            justify-content: space-between;
+            border-bottom: 3px solid black;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
         }
         
         .logo-mobile {
-            font-size: 22px;
-            font-weight: 800;
+            font-size: 26px;
+            font-weight: bold;
+            color: red;
         }
         
-        .logo-mobile .red {
-            color: #e60000;
+        .logo-mobile span {
+            color: black;
         }
         
-        .dark-mode .logo-mobile .red {
-            color: #ff3333 !important;
-        }
-        
-        .logo-mobile .black {
-            color: #000;
-        }
-        
-        .dark-mode .logo-mobile .black {
-            color: #fff !important;
+        .dark-mode .logo-mobile span {
+            color: white;
         }
         
         .header-actions {
@@ -152,72 +115,70 @@
             gap: 15px;
         }
         
+        /* Mode Button - sesuai style.css Anda */
+        .mode-btn {
+            padding: 8px 10px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: #222;
+            color: white;
+            font-size: 18px;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+        
+        .mode-btn:hover {
+            transform: scale(1.1);
+        }
+        
         /* =======================
-           SEARCH BAR MOBILE
+           SEARCH BOX - Desktop Style untuk Mobile
+           (sesuai header.css Anda)
         ======================= */
-        .mobile-search-container {
-            padding: 15px;
-            background: #f8f8f8;
+        .search-container {
+            padding: 15px 25px;
+            background: #fff;
             border-bottom: 1px solid #eee;
         }
         
-        .dark-mode .mobile-search-container {
-            background: #222;
-            border-bottom-color: #444;
-        }
-        
-        .mobile-search {
+        .search-box {
             display: flex;
-            background: white;
-            border-radius: 25px;
-            overflow: hidden;
-            border: 1px solid #ddd;
+            align-items: center;
+            gap: 15px;
         }
         
-        .dark-mode .mobile-search {
-            background: #333;
-            border-color: #555;
+        .search-box input {
+            padding: 10px 12px;
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid #aaa;
+            font-size: 14px;
         }
         
-        .mobile-search input {
-            flex: 1;
-            border: none;
-            padding: 12px 15px;
-            font-size: 15px;
-            background: transparent;
-            color: #333;
-        }
-        
-        .dark-mode .mobile-search input {
-            color: #e0e0e0;
-        }
-        
-        .mobile-search button {
-            background: #e60000;
+        .search-box button {
+            background: red;
             color: white;
             border: none;
-            padding: 0 20px;
-            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 20px;
             cursor: pointer;
+            font-size: 16px;
         }
         
         /* =======================
-           INFO BAR MOBILE
+           INFO BAR - Desktop Style untuk Mobile
+           (sesuai layout desktop)
         ======================= */
         .info-bar {
             display: flex;
             justify-content: space-between;
-            padding: 10px 15px;
+            padding: 10px 25px;
             background: #f8f8f8;
             border-bottom: 1px solid #eee;
-            font-size: 13px;
+            font-size: 14px;
             flex-wrap: wrap;
             gap: 10px;
-        }
-        
-        .dark-mode .info-bar {
-            background: #222;
-            border-bottom-color: #444;
         }
         
         .info-item {
@@ -226,243 +187,213 @@
             gap: 5px;
         }
         
-        .info-item i {
-            color: #e60000;
+        .info-item #mobileJam {
+            color: blue;
+            font-weight: bold;
+        }
+        
+        .info-item #mobileTemperature {
+            color: orange;
+            font-weight: bold;
         }
         
         /* =======================
-           NAVIGASI MOBILE
+           NAVBAR - Desktop Style untuk Mobile
+           (sesuai navbar.css Anda)
         ======================= */
-        .mobile-nav {
+        .navbar-mobile {
+            background: red;
+            padding: 12px 25px;
             display: flex;
+            gap: 15px;
             overflow-x: auto;
-            background: #e60000;
-            padding: 0 15px;
-            gap: 0;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
         }
         
-        .mobile-nav::-webkit-scrollbar {
+        .navbar-mobile::-webkit-scrollbar {
             display: none;
         }
         
-        .mobile-nav a {
+        .navbar-mobile a {
             color: white;
+            font-weight: bold;
             text-decoration: none;
-            padding: 14px 15px;
-            font-size: 14px;
-            font-weight: 600;
             white-space: nowrap;
-            border-bottom: 3px solid transparent;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
         }
         
-        .mobile-nav a.active {
-            background: rgba(255,255,255,0.15);
+        .navbar-mobile a.active {
             border-bottom-color: white;
         }
         
         /* =======================
-           BREAKING NEWS MOBILE
+           BREAKING NEWS - Desktop Style untuk Mobile
+           (sesuai breaking news di style.css Anda)
         ======================= */
-        .breaking-mobile {
+        .breaking-container-mobile {
             background: #8B0000;
-            padding: 10px 15px;
+            padding: 25px 0;
+        }
+        
+        .breaking-box-mobile {
+            background: white;
+            margin: 0 15px;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+        }
+        
+        .breaking-header-mobile {
             display: flex;
             align-items: center;
             gap: 10px;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
+            margin-bottom: 12px;
         }
         
         .breaking-badge {
             background: #ff3333;
-            padding: 3px 8px;
+            color: white;
+            padding: 5px 10px;
             border-radius: 4px;
             font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .breaking-title {
+            color: #b30000;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .breaking-items {
             display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .breaking-text {
-            flex: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            cursor: pointer;
-        }
-        
-        /* =======================
-           BREAKING SLIDER MOBILE
-        ======================= */
-        .breaking-slider-mobile {
-            position: relative;
-            overflow: hidden;
-            margin: 15px;
-            border-radius: 12px;
-            background: white;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        .dark-mode .breaking-slider-mobile {
-            background: #2a2a2a;
-        }
-        
-        .slider-wrapper {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        
-        .slider-item {
-            min-width: 100%;
-            padding: 15px;
-            text-align: center;
-        }
-        
-        .slider-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        
-        .slider-item h4 {
-            font-size: 16px;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-        
-        .slider-nav {
-            display: flex;
-            justify-content: center;
+            flex-direction: column;
             gap: 10px;
-            margin-top: 10px;
         }
         
-        .slider-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ccc;
-            cursor: pointer;
+        .breaking-item {
+            padding: 10px;
+            background: #ffefef;
+            border-radius: 8px;
+            border-left: 4px solid red;
         }
         
-        .slider-dot.active {
-            background: #e60000;
+        .breaking-item h4 {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .dark-mode .breaking-item {
+            background: #3a1a1a;
+        }
+        
+        .dark-mode .breaking-item h4 {
+            color: #e0e0e0;
         }
         
         /* =======================
-           NEWS LIST MOBILE
+           NEWS CONTAINER - Desktop Style untuk Mobile
+           (sesuai content.css Anda)
         ======================= */
-        .news-section {
-            padding: 15px;
+        .news-container-mobile {
+            padding: 30px 25px;
         }
         
-        .section-header {
+        #mobileSectionTitle {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .dark-mode #mobileSectionTitle {
+            color: white;
+            border-bottom-color: #444;
+        }
+        
+        /* News Card - sesuai content.css Anda */
+        .news-card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .news-card img {
+            width: 100%;
+            height: 180px;
+            border-radius: 8px;
+            object-fit: cover;
             margin-bottom: 15px;
         }
         
-        .section-title {
+        .news-card .text h3 {
+            margin: 0 0 10px 0;
             font-size: 18px;
-            font-weight: 700;
-            color: #333;
-        }
-        
-        .see-all {
-            color: #e60000;
-            font-size: 14px;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .news-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .news-item {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .news-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .news-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        
-        .news-content {
-            padding: 15px;
-        }
-        
-        .news-content h3 {
-            font-size: 16px;
             line-height: 1.4;
-            margin-bottom: 8px;
-            color: #333;
         }
         
-        .news-deskripsi {
+        .news-card .text p {
             font-size: 14px;
             color: #666;
             line-height: 1.5;
-            margin-bottom: 12px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;    /* Limit to 2 lines */
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            /* Untuk browser modern yang support line-clamp */
-            line-clamp: 2;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .news-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            margin-bottom: 15px;
         }
         
         .kategori-badge {
-            background: #e60000;
+            display: inline-block;
+            background: red;
             color: white;
             padding: 4px 10px;
             border-radius: 4px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
         
-        .btn-news-mobile {
-            background: #e60000;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
+        /* Button - sesuai style.css Anda */
+        .btn-news {
             display: inline-block;
+            background: red !important;
+            padding: 8px 15px;
+            color: white !important;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .dark-mode .btn-news {
+            background: red !important;
+            color: white !important;
         }
         
         /* =======================
-           BOTTOM NAVIGATION
+           FOOTER - Desktop Style untuk Mobile
+           (sesuai footer.css Anda)
+        ======================= */
+        .footer-mobile {
+            padding: 20px;
+            background: black;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        
+        /* =======================
+           BOTTOM NAVIGATION (Mobile only)
         ======================= */
         .bottom-nav {
             position: sticky;
@@ -475,6 +406,11 @@
             padding: 12px 0;
             border-top: 1px solid #eee;
             z-index: 1000;
+        }
+        
+        .dark-mode .bottom-nav {
+            background: #1e1e1e;
+            border-top-color: #444;
         }
         
         .nav-item {
@@ -497,88 +433,28 @@
         }
         
         /* =======================
-           DETAIL PAGE MOBILE
-        ======================= */
-        .detail-header {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background: white;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .back-btn {
-            background: none;
-            border: none;
-            font-size: 22px;
-            color: #e60000;
-            margin-right: 15px;
-            cursor: pointer;
-        }
-        
-        .detail-title {
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 1.3;
-            margin: 15px;
-        }
-        
-        .detail-meta {
-            display: flex;
-            justify-content: space-between;
-            padding: 0 15px 15px;
-            font-size: 13px;
-            color: #666;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .detail-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            margin: 15px 0;
-        }
-        
-        .detail-content {
-            padding: 0 15px 80px;
-            line-height: 1.7;
-            font-size: 16px;
-        }
-        
-        .detail-content p {
-            margin-bottom: 15px;
-        }
-        
-        /* =======================
-           UTILITIES
-        ======================= */
-        .mode-toggle {
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: #666;
-        }
-        
-        .dark-mode .mode-toggle {
-            color: #aaa;
-        }
-        
-        /* =======================
-           RESPONSIVE
+           RESPONSIVE ADJUSTMENTS
         ======================= */
         @media (max-width: 380px) {
             .phone-container {
                 max-width: 100%;
             }
             
-            .mobile-nav a {
-                font-size: 13px;
-                padding: 14px 12px;
+            .mobile-header,
+            .search-container,
+            .info-bar,
+            .navbar-mobile,
+            .news-container-mobile {
+                padding-left: 15px;
+                padding-right: 15px;
             }
             
-            .news-img {
-                height: 150px;
+            .navbar-mobile {
+                gap: 10px;
+            }
+            
+            .navbar-mobile a {
+                font-size: 13px;
             }
         }
         
@@ -591,95 +467,83 @@
 <body>
     <!-- Phone Container -->
     <div class="phone-container">
-        <!-- Status Bar -->
-        <div class="status-bar">
-            <div class="status-time" id="mobileTime">00:00</div>
-            <div class="status-icons">
-                <i class="fas fa-signal"></i>
-                <i class="fas fa-wifi"></i>
-                <i class="fas fa-battery-three-quarters"></i>
-            </div>
-        </div>
-        
-        <!-- Header Mobile -->
+        <!-- Header Mobile (Desktop Style) -->
         <header class="mobile-header">
             <div class="logo-mobile">
-                <span class="red">Nusantara</span><span class="black">Kini</span>
+                <span class="red">Nusantara</span>Kini
             </div>
             
             <div class="header-actions">
-                <button class="mode-toggle" id="mobileModeBtn">
-                    <i class="fas fa-moon"></i>
+                <button class="mode-btn" id="mobileModeBtn">
+                    🌙
                 </button>
             </div>
         </header>
         
-        <!-- Search Bar -->
-        <div class="mobile-search-container">
-            <div class="mobile-search">
+        <!-- Search Box -->
+        <div class="search-container">
+            <div class="search-box">
                 <input type="text" placeholder="Cari berita..." id="mobileSearchInput">
-                <button id="mobileSearchBtn">
-                    <i class="fas fa-search"></i>
-                </button>
+                <button id="mobileSearchBtn">🔍</button>
             </div>
         </div>
         
         <!-- Info Bar -->
         <div class="info-bar">
             <div class="info-item">
-                <i class="fas fa-clock"></i>
                 <span id="mobileJam">00:00</span>
             </div>
             <div class="info-item">
-                <i class="fas fa-map-marker-alt"></i>
                 <span id="mobileLokasi">[lokasi...]</span>
             </div>
             <div class="info-item">
-                <i class="fas fa-cloud-sun"></i>
                 <span id="mobileCuaca">Cuaca Cerah</span>
             </div>
             <div class="info-item">
-                <i class="fas fa-thermometer-half"></i>
-                <span id="mobileTemperature" style="color: orange;">32°C</span>
+                <span id="mobileTemperature">--°C</span>
             </div>
         </div>
         
-        <!-- Navigation Mobile -->
-        <nav class="mobile-nav" id="mobileNav">
+        <!-- Navbar -->
+        <nav class="navbar-mobile" id="mobileNav">
             <a href="#" class="active" data-kategori="hari-ini">Home</a>
-            <a href="#" data-kategori="hari-ini">Hari Ini</a>
+            <a href="#" data-kategori="hari-ini">Berita Hari Ini</a>
             <a href="#" data-kategori="populer">Populer</a>
             <a href="#" data-kategori="rekomendasi">Rekomendasi</a>
-            <a href="#" data-kategori="semua">Semua</a>
+            <a href="#" data-kategori="semua">Semua Berita</a>
         </nav>
         
-        <!-- Breaking News Slider Mobile -->
-        <div class="breaking-slider-mobile" id="breakingSliderMobile" style="display: none;">
-            <div class="slider-wrapper" id="mobileSliderWrapper">
-                <!-- Slider items akan diisi oleh JS -->
-            </div>
-            <div class="slider-nav" id="sliderNav">
-                <!-- Dots akan diisi oleh JS -->
-            </div>
-        </div>
-        
-        <!-- News List -->
-        <div class="news-section">
-            <div class="section-header">
-                <h2 class="section-title" id="mobileSectionTitle">Berita Hari Ini</h2>
-                <a href="#" class="see-all" id="seeAllBtn">Lihat Semua</a>
-            </div>
-            
-            <div class="news-list" id="mobileNewsList">
-                <!-- News items akan diisi oleh JS -->
+        <!-- Breaking News -->
+        <div class="breaking-container-mobile" id="breakingContainerMobile">
+            <div class="breaking-box-mobile">
+                <div class="breaking-header-mobile">
+                    <div class="breaking-badge">🔴 BREAKING NEWS</div>
+                    <h2 class="breaking-title">HOT News!!</h2>
+                </div>
+                <div class="breaking-items" id="breakingItems">
+                    <!-- Breaking items akan diisi JS -->
+                </div>
             </div>
         </div>
         
-        <!-- Bottom Navigation -->
+        <!-- News Container -->
+        <section class="news-container-mobile">
+            <h2 id="mobileSectionTitle">Berita Hari Ini</h2>
+            <div id="mobileNewsList">
+                <!-- News items akan diisi JS -->
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer-mobile">
+            <p>© 2025 NusantaraKini. Semua Hak Dilindungi.</p>
+        </footer>
+        
+        <!-- Bottom Navigation (Mobile only) -->
         <nav class="bottom-nav">
             <a href="#" class="nav-item active" id="navHome">
                 <i class="fas fa-home"></i>
-                <span>Beranda</span>
+                <span>Home</span>
             </a>
             <a href="#" class="nav-item" id="navPopular">
                 <i class="fas fa-fire"></i>
@@ -710,11 +574,12 @@
         // MOBILE FUNCTIONS
         // =========================
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Mobile version loaded');
+            console.log('NusantaraKini Mobile loaded');
             
             // Inisialisasi
             initMobileApp();
             setupMobileListeners();
+            setupClockIntegration();
         });
         
         function initMobileApp() {
@@ -725,10 +590,10 @@
             // Tampilkan berita default
             tampilkanBeritaMobile("hari-ini");
             
-            // Setup breaking slider
-            setupBreakingSlider();
+            // Setup breaking news
+            setupBreakingNews();
             
-            // Setup lokasi dan cuaca (gunakan dari clock.js)
+            // Setup lokasi dan cuaca
             setupLokasiCuaca();
         }
         
@@ -736,97 +601,56 @@
             const now = new Date();
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
-            document.getElementById('mobileTime').textContent = `${hours}:${minutes}`;
             document.getElementById('mobileJam').textContent = `${hours}:${minutes}`;
         }
         
         function setupLokasiCuaca() {
-            // Gunakan fungsi dari clock.js yang sudah ada
-            // Fungsi ini akan otomatis dijalankan oleh clock.js
-            // Kita hanya perlu update elemen mobile
-            
-            // Simulasi jika clock.js tidak berjalan
-            if (!document.getElementById('lokasi')) {
-                document.getElementById('mobileLokasi').textContent = "Jakarta, ID";
-                document.getElementById('mobileCuaca').textContent = "Cerah Berawan";
-                document.getElementById('mobileTemperature').textContent = "27°C";
+            // Gunakan fungsi dari clock.js jika tersedia
+            // Default values
+            document.getElementById('mobileLokasi').textContent = "Lokasi: Jakarta";
+            document.getElementById('mobileCuaca').textContent = "Cuaca Cerah";
+            document.getElementById('mobileTemperature').textContent = "32°C";
+            document.getElementById('mobileTemperature').style.color = "orange";
+        }
+        
+        function setupClockIntegration() {
+            // Integrasi dengan clock.js
+            if (typeof updateJam === 'function') {
+                // Override untuk update mobile juga
+                const originalUpdateJam = updateJam;
+                window.updateJam = function() {
+                    originalUpdateJam();
+                    updateMobileTime();
+                };
             }
         }
         
-        function setupBreakingSlider() {
-            const breakingSection = document.getElementById('breakingSliderMobile');
-            const sliderWrapper = document.getElementById('mobileSliderWrapper');
-            const sliderNav = document.getElementById('sliderNav');
+        function setupBreakingNews() {
+            const breakingContainer = document.getElementById('breakingContainerMobile');
+            const breakingItems = document.getElementById('breakingItems');
             
-            // Ambil data breaking dari script.js atau buat sendiri
-            const breakingData = [
-                ...(beritaData["hari-ini"] || []).slice(0, 3),
-                ...(beritaData["populer"] || []).slice(0, 2),
-                ...(beritaData["rekomendasi"] || []).slice(0, 2)
-            ];
+            // Ambil 3 berita pertama dari hari-ini
+            const breakingData = beritaData["hari-ini"] ? beritaData["hari-ini"].slice(0, 3) : [];
             
             if (breakingData.length === 0) {
-                breakingSection.style.display = 'none';
+                breakingContainer.style.display = 'none';
                 return;
             }
             
-            breakingSection.style.display = 'block';
+            breakingItems.innerHTML = '';
             
-            // Clear existing
-            sliderWrapper.innerHTML = '';
-            sliderNav.innerHTML = '';
-            
-            // Add slider items
-            breakingData.forEach((item, index) => {
-                const sliderItem = document.createElement('div');
-                sliderItem.className = 'slider-item';
-                sliderItem.innerHTML = `
-                    <img src="${item.img}" alt="${item.judul}">
+            breakingData.forEach(item => {
+                const breakingItem = document.createElement('div');
+                breakingItem.className = 'breaking-item';
+                breakingItem.innerHTML = `
                     <h4>${item.judul}</h4>
-                    <a href="berita.html?id=${item.id}" class="btn-news-mobile">Baca Berita</a>
+                    <a href="berita.html?id=${item.id}" class="btn-news" style="font-size: 12px; padding: 5px 10px;">Baca</a>
                 `;
-                sliderWrapper.appendChild(sliderItem);
-                
-                // Add dot
-                const dot = document.createElement('div');
-                dot.className = `slider-dot ${index === 0 ? 'active' : ''}`;
-                dot.dataset.index = index;
-                dot.addEventListener('click', () => goToSlide(index));
-                sliderNav.appendChild(dot);
+                breakingItems.appendChild(breakingItem);
             });
-            
-            // Auto slide
-            let currentSlide = 0;
-            const totalSlides = breakingData.length;
-            
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                updateSlider();
-            }
-            
-            function updateSlider() {
-                sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-                
-                // Update active dot
-                document.querySelectorAll('.slider-dot').forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentSlide);
-                });
-            }
-            
-            function goToSlide(index) {
-                currentSlide = index;
-                updateSlider();
-            }
-            
-            // Auto slide every 5 seconds
-            let slideInterval = setInterval(nextSlide, 5000);
-            
-            // Pause on hover
-            breakingSection.addEventListener('mouseenter', () => clearInterval(slideInterval));
-            breakingSection.addEventListener('mouseleave', () => slideInterval = setInterval(nextSlide, 5000));
         }
         
-        // Fungsi untuk mendapatkan kategori berdasarkan ID (sama seperti di script.js)
+        // Fungsi untuk mendapatkan kategori berdasarkan ID
         function getKategoriMobile(id) {
             if (id >= 1 && id <= 10) return "Hari Ini";
             if (id >= 11 && id <= 20) return "Populer";
@@ -834,18 +658,26 @@
             return "Lainnya";
         }
         
-        // Fungsi tampilkan berita untuk mobile
+        // Fungsi tampilkan berita untuk mobile (mirip desktop style)
         function tampilkanBeritaMobile(kategori) {
             const newsList = document.getElementById('mobileNewsList');
             const sectionTitle = document.getElementById('mobileSectionTitle');
+            const breakingContainer = document.getElementById('breakingContainerMobile');
             
             newsList.innerHTML = '';
             
             // Update active nav
-            document.querySelectorAll('.mobile-nav a').forEach(a => {
+            document.querySelectorAll('.navbar-mobile a').forEach(a => {
                 a.classList.remove('active');
             });
-            document.querySelector(`.mobile-nav a[data-kategori="${kategori}"]`).classList.add('active');
+            document.querySelector(`.navbar-mobile a[data-kategori="${kategori}"]`).classList.add('active');
+            
+            // Show/hide breaking news based on category
+            if (kategori === "hari-ini" || kategori === "home") {
+                breakingContainer.style.display = 'block';
+            } else {
+                breakingContainer.style.display = 'none';
+            }
             
             if (kategori === "semua") {
                 sectionTitle.textContent = "SEMUA BERITA";
@@ -863,20 +695,18 @@
                 }
                 
                 semuaBerita.forEach(item => {
-                    const newsItem = document.createElement('div');
-                    newsItem.className = 'news-item';
-                    newsItem.innerHTML = `
-                        <img src="${item.img}" alt="${item.judul}" class="news-img">
-                        <div class="news-content">
+                    const newsCard = document.createElement('div');
+                    newsCard.className = 'news-card';
+                    newsCard.innerHTML = `
+                        <img src="${item.img}" alt="${item.judul}">
+                        <div class="text">
+                            <span class="kategori-badge">${getKategoriMobile(item.id)}</span>
                             <h3>${item.judul}</h3>
-                            <p class="news-deskripsi">${item.deskripsi}</p>
-                            <div class="news-meta">
-                                <span class="kategori-badge">${getKategoriMobile(item.id)}</span>
-                                <a href="berita.html?id=${item.id}" class="btn-news-mobile">Baca</a>
-                            </div>
+                            <p>${item.deskripsi}</p>
+                            <a href="berita.html?id=${item.id}" class="btn-news">Baca Selengkapnya →</a>
                         </div>
                     `;
-                    newsList.appendChild(newsItem);
+                    newsList.appendChild(newsCard);
                 });
             } else {
                 const data = beritaData[kategori];
@@ -887,23 +717,27 @@
                     return;
                 }
                 
-                sectionTitle.textContent = kategori.replace("-", " ").toUpperCase();
+                // Update section title
+                const titles = {
+                    'hari-ini': 'HARI INI',
+                    'populer': 'POPULER', 
+                    'rekomendasi': 'REKOMENDASI',
+                    'home': 'BERITA HARI INI'
+                };
+                sectionTitle.textContent = titles[kategori] || kategori.toUpperCase();
                 
                 data.forEach(item => {
-                    const newsItem = document.createElement('div');
-                    newsItem.className = 'news-item';
-                    newsItem.innerHTML = `
-                        <img src="${item.img}" alt="${item.judul}" class="news-img">
-                        <div class="news-content">
+                    const newsCard = document.createElement('div');
+                    newsCard.className = 'news-card';
+                    newsCard.innerHTML = `
+                        <img src="${item.img}" alt="${item.judul}">
+                        <div class="text">
                             <h3>${item.judul}</h3>
-                            <p class="news-deskripsi">${item.deskripsi}</p>
-                            <div class="news-meta">
-                                <span class="kategori-badge">${getKategoriMobile(item.id)}</span>
-                                <a href="berita.html?id=${item.id}" class="btn-news-mobile">Baca</a>
-                            </div>
+                            <p>${item.deskripsi}</p>
+                            <a href="berita.html?id=${item.id}" class="btn-news">Baca Selengkapnya →</a>
                         </div>
                     `;
-                    newsList.appendChild(newsItem);
+                    newsList.appendChild(newsCard);
                 });
             }
         }
@@ -912,26 +746,28 @@
         function setupMobileListeners() {
             // Mode gelap/terang
             const modeBtn = document.getElementById('mobileModeBtn');
-            const logoRed = document.querySelector('.logo-mobile .red');
             
             modeBtn.addEventListener('click', function() {
                 document.body.classList.toggle('dark-mode');
                 
                 if (document.body.classList.contains('dark-mode')) {
-                    modeBtn.innerHTML = '<i class="fas fa-sun"></i>';
-                    if (logoRed) logoRed.style.color = '#ff3333';
+                    modeBtn.textContent = "☀️";
                 } else {
-                    modeBtn.innerHTML = '<i class="fas fa-moon"></i>';
-                    if (logoRed) logoRed.style.color = '#e60000';
+                    modeBtn.textContent = "🌙";
                 }
             });
             
             // Navigation kategori
-            document.querySelectorAll('.mobile-nav a').forEach(menu => {
+            document.querySelectorAll('.navbar-mobile a').forEach(menu => {
                 menu.addEventListener('click', function(e) {
                     e.preventDefault();
                     const kategori = this.getAttribute('data-kategori');
                     tampilkanBeritaMobile(kategori);
+                    
+                    // Scroll to news section
+                    document.querySelector('.news-container-mobile').scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
             });
             
@@ -961,9 +797,11 @@
                 
                 const newsList = document.getElementById('mobileNewsList');
                 const sectionTitle = document.getElementById('mobileSectionTitle');
+                const breakingContainer = document.getElementById('breakingContainerMobile');
                 
+                breakingContainer.style.display = 'none';
                 newsList.innerHTML = '';
-                sectionTitle.textContent = `HASIL: "${keyword}"`;
+                sectionTitle.textContent = `HASIL PENCARIAN: "${keyword}"`;
                 
                 if (hasil.length === 0) {
                     newsList.innerHTML = `<p style='text-align:center; padding:20px; color:#666;'>Tidak ditemukan berita untuk "${keyword}".</p>`;
@@ -971,21 +809,22 @@
                 }
                 
                 hasil.forEach(item => {
-                    const newsItem = document.createElement('div');
-                    newsItem.className = 'news-item';
-                    newsItem.innerHTML = `
-                        <img src="${item.img}" alt="${item.judul}" class="news-img">
-                        <div class="news-content">
+                    const newsCard = document.createElement('div');
+                    newsCard.className = 'news-card';
+                    newsCard.innerHTML = `
+                        <img src="${item.img}" alt="${item.judul}">
+                        <div class="text">
+                            <span class="kategori-badge">${getKategoriMobile(item.id)}</span>
                             <h3>${item.judul}</h3>
-                            <p class="news-deskripsi">${item.deskripsi}</p>
-                            <div class="news-meta">
-                                <span class="kategori-badge">${getKategoriMobile(item.id)}</span>
-                                <a href="berita.html?id=${item.id}" class="btn-news-mobile">Baca</a>
-                            </div>
+                            <p>${item.deskripsi}</p>
+                            <a href="berita.html?id=${item.id}" class="btn-news">Baca Selengkapnya →</a>
                         </div>
                     `;
-                    newsList.appendChild(newsItem);
+                    newsList.appendChild(newsCard);
                 });
+                
+                // Hide keyboard on mobile after search
+                searchInput.blur();
             }
             
             searchBtn.addEventListener('click', performMobileSearch);
@@ -1009,38 +848,26 @@
                     // Handle navigation
                     const navId = this.id;
                     
-                    if (navId === 'navHome' || navId === 'navPopular') {
-                        // Scroll to top
+                    if (navId === 'navHome') {
+                        tampilkanBeritaMobile('hari-ini');
                         window.scrollTo({ top: 0, behavior: 'smooth' });
-                        
-                        if (navId === 'navPopular') {
-                            tampilkanBeritaMobile('populer');
-                        }
+                    } else if (navId === 'navPopular') {
+                        tampilkanBeritaMobile('populer');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                     } else if (navId === 'navSearch') {
-                        // Focus on search input
                         searchInput.focus();
                     } else {
-                        // Simulate other features
                         alert(`Fitur ${this.querySelector('span').textContent} akan segera hadir!`);
                     }
                 });
             });
             
-            // See all button
-            document.getElementById('seeAllBtn').addEventListener('click', function(e) {
+            // Home link in navbar
+            document.querySelector('.navbar-mobile a[data-kategori="home"]').addEventListener('click', function(e) {
                 e.preventDefault();
-                tampilkanBeritaMobile('semua');
+                tampilkanBeritaMobile('hari-ini');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-        }
-        
-        // Integrasi dengan clock.js yang sudah ada
-        // Override fungsi updateJam untuk update mobile juga
-        const originalUpdateJam = window.updateJam;
-        if (originalUpdateJam) {
-            window.updateJam = function() {
-                originalUpdateJam();
-                updateMobileTime();
-            };
         }
     </script>
 </body>
