@@ -68,7 +68,6 @@
         
         /* =======================
            PHONE CONTAINER
-           (mirip desktop layout)
         ======================= */
         .phone-container {
             width: 100%;
@@ -77,11 +76,11 @@
             min-height: 100vh;
             background: white;
             position: relative;
+            padding-bottom: 20px; /* Space untuk footer */
         }
         
         /* =======================
            HEADER - Desktop Style untuk Mobile
-           (sesuai header.css Anda)
         ======================= */
         .mobile-header {
             background: #fff;
@@ -133,8 +132,7 @@
         }
         
         /* =======================
-           SEARCH BOX - Desktop Style untuk Mobile
-           (sesuai header.css Anda)
+           SEARCH BOX
         ======================= */
         .search-container {
             padding: 15px 25px;
@@ -167,8 +165,7 @@
         }
         
         /* =======================
-           INFO BAR - Desktop Style untuk Mobile
-           (sesuai layout desktop)
+           INFO BAR
         ======================= */
         .info-bar {
             display: flex;
@@ -198,8 +195,7 @@
         }
         
         /* =======================
-           NAVBAR - Desktop Style untuk Mobile
-           (sesuai navbar.css Anda)
+           NAVBAR
         ======================= */
         .navbar-mobile {
             background: red;
@@ -209,6 +205,9 @@
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
+            position: sticky;
+            top: 0;
+            z-index: 999;
         }
         
         .navbar-mobile::-webkit-scrollbar {
@@ -229,8 +228,7 @@
         }
         
         /* =======================
-           BREAKING NEWS - Desktop Style untuk Mobile
-           (sesuai breaking news di style.css Anda)
+           BREAKING NEWS
         ======================= */
         .breaking-container-mobile {
             background: #8B0000;
@@ -296,11 +294,11 @@
         }
         
         /* =======================
-           NEWS CONTAINER - Desktop Style untuk Mobile
-           (sesuai content.css Anda)
+           NEWS CONTAINER
         ======================= */
         .news-container-mobile {
             padding: 30px 25px;
+            min-height: 60vh; /* Pastikan konten cukup tinggi */
         }
         
         #mobileSectionTitle {
@@ -316,7 +314,7 @@
             border-bottom-color: #444;
         }
         
-        /* News Card - sesuai content.css Anda */
+        /* News Card */
         .news-card {
             background: white;
             padding: 15px;
@@ -359,7 +357,7 @@
             margin-bottom: 10px;
         }
         
-        /* Button - sesuai style.css Anda */
+        /* Button */
         .btn-news {
             display: inline-block;
             background: red !important;
@@ -380,8 +378,7 @@
         }
         
         /* =======================
-           FOOTER - Desktop Style untuk Mobile
-           (sesuai footer.css Anda)
+           FOOTER
         ======================= */
         .footer-mobile {
             padding: 20px;
@@ -390,50 +387,14 @@
             text-align: center;
             font-size: 14px;
             margin-top: 20px;
-        }
-        
-        /* =======================
-           BOTTOM NAVIGATION (Mobile only)
-        ======================= */
-        .bottom-nav {
-            position: sticky;
+            position: relative;
             bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            border-top: 1px solid #eee;
-            z-index: 1000;
-        }
-        
-        .dark-mode .bottom-nav {
-            background: #1e1e1e;
-            border-top-color: #444;
-        }
-        
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #888;
-            font-size: 11px;
-            transition: color 0.2s;
-        }
-        
-        .nav-item.active {
-            color: #e60000;
-        }
-        
-        .nav-item i {
-            font-size: 20px;
-            margin-bottom: 4px;
+            width: 100%;
         }
         
         /* =======================
            RESPONSIVE ADJUSTMENTS
+           (Bottom Navigation DIHILANGKAN)
         ======================= */
         @media (max-width: 380px) {
             .phone-container {
@@ -538,30 +499,6 @@
         <footer class="footer-mobile">
             <p>© 2025 NusantaraKini. Semua Hak Dilindungi.</p>
         </footer>
-        
-        <!-- Bottom Navigation (Mobile only) -->
-        <nav class="bottom-nav">
-            <a href="#" class="nav-item active" id="navHome">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
-            </a>
-            <a href="#" class="nav-item" id="navPopular">
-                <i class="fas fa-fire"></i>
-                <span>Trending</span>
-            </a>
-            <a href="#" class="nav-item" id="navSearch">
-                <i class="fas fa-search"></i>
-                <span>Cari</span>
-            </a>
-            <a href="#" class="nav-item" id="navBookmark">
-                <i class="fas fa-bookmark"></i>
-                <span>Simpan</span>
-            </a>
-            <a href="#" class="nav-item" id="navProfile">
-                <i class="fas fa-user"></i>
-                <span>Profil</span>
-            </a>
-        </nav>
     </div>
 
     <!-- JavaScript Files -->
@@ -832,34 +769,6 @@
                 if (e.key === 'Enter') {
                     performMobileSearch();
                 }
-            });
-            
-            // Bottom navigation
-            document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Update active state
-                    document.querySelectorAll('.bottom-nav .nav-item').forEach(nav => {
-                        nav.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                    
-                    // Handle navigation
-                    const navId = this.id;
-                    
-                    if (navId === 'navHome') {
-                        tampilkanBeritaMobile('hari-ini');
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else if (navId === 'navPopular') {
-                        tampilkanBeritaMobile('populer');
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else if (navId === 'navSearch') {
-                        searchInput.focus();
-                    } else {
-                        alert(`Fitur ${this.querySelector('span').textContent} akan segera hadir!`);
-                    }
-                });
             });
             
             // Home link in navbar
