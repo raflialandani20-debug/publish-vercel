@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NusantaraKini - Portal Berita Mobile</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Mobile (disederhanakan dari CSS Anda) -->
+    <style>
+        /* =======================
+           RESET & GLOBAL
+        ======================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+        
+        body {
+            background: #f5f5f5;
+            color: #333;
+            max-width: 100%;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Mode Gelap */
+        .dark-mode {
+            background: #121212 !important;
+            color: #e0e0e0 !important;
+        }
+        
+        .dark-mode .phone-container {
+            background: #1e1e1e !important;
+        }
+        
+        .dark-mode .mobile-header {
+            background: #2a2a2a !important;
+            border-bottom-color: #444 !important;
+        }
+        
+        .dark-mode .mobile-nav {
+            background: #b30000 !important;
+        }
+        
+        .dark-mode .news-item {
+            background: #2a2a2a !important;
+            box-shadow: 0 2px 8px rgba(255,255,255,0.05) !important;
+        }
+        
+        .dark-mode .section-title,
+        .dark-mode .news-content h3,
+        .dark-mode .news-meta {
+            color: #e0e0e0 !important;
+        }
+        
+        .dark-mode .news-meta .kategori-badge {
+            background: #e60000 !important;
+            color: white !important;
+        }
+        
+        .dark-mode .detail-content {
+            background: #1e1e1e !important;
+        }
+        
+        .dark-mode .bottom-nav {
+            background: #1e1e1e !important;
+            border-top-color: #444 !important;
+        }
+        
+        /* =======================
+           PHONE CONTAINER
+        ======================= */
+        .phone-container {
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: white;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        /* =======================
+           STATUS BAR
+        ======================= */
+        .status-bar {
+            height: 50px;
+            background: #000;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .dark-mode .status-bar {
+            background: #000;
+        }
+        
+        .status-time {
+            font-weight: bold;
+        }
+        
+        .status-icons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        /* =======================
+           HEADER MOBILE
+        ======================= */
+        .mobile-header {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            background: white;
+        }
+        
+        .logo-mobile {
+            font-size: 22px;
+            font-weight: 800;
+        }
+        
+        .logo-mobile .red {
+            color: #e60000;
+        }
+        
+        .dark-mode .logo-mobile .red {
+            color: #ff3333 !important;
+        }
+        
+        .logo-mobile .black {
+            color: #000;
+        }
+        
+        .dark-mode .logo-mobile .black {
+            color: #fff !important;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        /* =======================
+           SEARCH BAR MOBILE
+        ======================= */
+        .mobile-search-container {
+            padding: 15px;
+            background: #f8f8f8;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dark-mode .mobile-search-container {
+            background: #222;
+            border-bottom-color: #444;
+        }
+        
+        .mobile-search {
+            display: flex;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+        
+        .dark-mode .mobile-search {
+            background: #333;
+            border-color: #555;
+        }
+        
+        .mobile-search input {
+            flex: 1;
+            border: none;
+            padding: 12px 15px;
+            font-size: 15px;
+            background: transparent;
+            color: #333;
+        }
+        
+        .dark-mode .mobile-search input {
+            color: #e0e0e0;
+        }
+        
+        .mobile-search button {
+            background: #e60000;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        /* =======================
+           INFO BAR MOBILE
+        ======================= */
+        .info-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: #f8f8f8;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .dark-mode .info-bar {
+            background: #222;
+            border-bottom-color: #444;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .info-item i {
+            color: #e60000;
+        }
+        
+        /* =======================
+           NAVIGASI MOBILE
+        ======================= */
+        .mobile-nav {
+            display: flex;
+            overflow-x: auto;
+            background: #e60000;
+            padding: 0 15px;
+            gap: 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .mobile-nav::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .mobile-nav a.active {
+            background: rgba(255,255,255,0.15);
+            border-bottom-color: white;
+        }
+        
+        /* =======================
+           BREAKING NEWS MOBILE
+        ======================= */
+        .breaking-mobile {
+            background: #8B0000;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .breaking-badge {
+            background: #ff3333;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .breaking-text {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+        
+        /* =======================
+           BREAKING SLIDER MOBILE
+        ======================= */
+        .breaking-slider-mobile {
+            position: relative;
+            overflow: hidden;
+            margin: 15px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .dark-mode .breaking-slider-mobile {
+            background: #2a2a2a;
+        }
+        
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .slider-item {
+            min-width: 100%;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .slider-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .slider-item h4 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+        }
+        
+        .slider-dot.active {
+            background: #e60000;
+        }
+        
+        /* =======================
+           NEWS LIST MOBILE
+        ======================= */
+        .news-section {
+            padding: 15px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .see-all {
+            color: #e60000;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .news-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .news-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .news-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .news-content {
+            padding: 15px;
+        }
+        
+        .news-content h3 {
+            font-size: 16px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .news-deskripsi {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;    /* Limit to 2 lines */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            /* Untuk browser modern yang support line-clamp */
+            line-clamp: 2;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .kategori-badge {
+            background: #e60000;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .btn-news-mobile {
+            background: #e60000;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        /* =======================
+           BOTTOM NAVIGATION
+        ======================= */
+        .bottom-nav {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid #eee;
+            z-index: 1000;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #888;
+            font-size: 11px;
+            transition: color 0.2s;
+        }
+        
+        .nav-item.active {
+            color: #e60000;
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        
+        /* =======================
+           DETAIL PAGE MOBILE
+        ======================= */
+        .detail-header {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: #e60000;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .detail-title {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 15px;
+        }
+        
+        .detail-meta {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px 15px;
+            font-size: 13px;
+            color: #666;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .detail-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            margin: 15px 0;
+        }
+        
+        .detail-content {
+            padding: 0 15px 80px;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+        
+        .detail-content p {
+            margin-bottom: 15px;
+        }
+        
+        /* =======================
+           UTILITIES
+        ======================= */
+        .mode-toggle {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .dark-mode .mode-toggle {
+            color: #aaa;
+        }
+        
+        /* =======================
+           RESPONSIVE
+        ======================= */
+        @media (max-width: 380px) {
+            .phone-container {
+                max-width: 100%;
+            }
+            
+            .mobile-nav a {
+                font-size: 13px;
+                padding: 14px 12px;
+            }
+            
+            .news-img {
+                height: 150px;
+            }
+        }
+        
+        /* Hide scrollbar */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Phone Container -->
+    <div class="phone-container">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-time" id="mobileTime">00:00</div>
+            <div class="status-icons">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-three-quarters"></i>
+            </div>
+        </div>
+        
+        <!-- Header Mobile -->
+        <header class="mobile-header">
+            <div class="logo-mobile">
+                <span class="red">Nusantara</span><span class="black">Kini</span>
+            </div>
+            
+            <div class="header-actions">
+                <button class="mode-toggle" id="mobileModeBtn">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+        
+        <!-- Search Bar -->
+        <div class="mobile-search-container">
+            <div class="mobile-search">
+                <input type="text" placeholder="Cari berita..." id="mobileSearchInput">
+                <button id="mobileSearchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Info Bar -->
+        <div class="info-bar">
+            <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <span id="mobileJam">00:00</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span id="mobileLokasi">[lokasi...]</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-cloud-sun"></i>
+                <span id="mobileCuaca">Cuaca Cerah</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-thermometer-half"></i>
+                <span id="mobileTemperature" style="color: orange;">32°C</span>
+            </div>
+        </div>
+        
+        <!-- Navigation Mobile -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="#" class="active" data-kategori="hari-ini">Home</a>
+            <a href="#" data-kategori="hari-ini">Hari Ini</a>
+            <a href="#" data-kategori="populer">Populer</a>
+            <a href="#" data-kategori="rekomendasi">Rekomendasi</a>
+            <a href="#" data-kategori="semua">Semua</a>
+        </nav>
+        
+        <!-- Breaking News Slider Mobile -->
+        <div class="breaking-slider-mobile" id="breakingSliderMobile" style="display: none;">
+            <div class="slider-wrapper" id="mobileSliderWrapper">
+                <!-- Slider items akan diisi oleh JS -->
+            </div>
+            <div class="slider-nav" id="sliderNav">
+                <!-- Dots akan diisi oleh JS -->
+            </div>
+        </div>
+        
+        <!-- News List -->
+        <div class="news-section">
+            <div class="section-header">
+                <h2 class="section-title" id="mobileSectionTitle">Berita Hari Ini</h2>
+                <a href="#" class="see-all" id="seeAllBtn">Lihat Semua</a>
+            </div>
+            
+            <div class="news-list" id="mobileNewsList">
+                <!-- News items akan diisi oleh JS -->
+            </div>
+        </div>
+        
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active" id="navHome">
+                <i class="fas fa-home"></i>
+                <span>Beranda</span>
+            </a>
+            <a href="#" class="nav-item" id="navPopular">
+                <i class="fas fa-fire"></i>
+                <span>Trending</span>
+            </a>
+            <a href="#" class="nav-item" id="navSearch">
+                <i class="fas fa-search"></i>
+                <span>Cari</span>
+            </a>
+            <a href="#" class="nav-item" id="navBookmark">
+                <i class="fas fa-bookmark"></i>
+                <span>Simpan</span>
+            </a>
+            <a href="#" class="nav-item" id="navProfile">
+                <i class="fas fa-user"></i>
+                <span>Profil</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/data.js"></script>
+    <script src="js/clock.js"></script>
+    
+    <!-- Mobile JavaScript -->
+    <script>
+        // =========================
+        // MOBILE FUNCTIONS
+        // =========================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Mobile version loaded');
+            
+            // Inisialisasi
+            initMobileApp();
+            setupMobileListeners();
+        });
+        
+        function initMobileApp() {
+            // Update jam untuk mobile
+            updateMobileTime();
+            setInterval(updateMobileTime, 1000);
+            
+            // Tampilkan berita default
+            tampilkanBeritaMobile("hari-ini");
+            
+            // Setup breaking slider
+            setupBreakingSlider();
+            
+            // Setup lokasi dan cuaca (gunakan dari clock.js)
+            setupLokasiCuaca();
+        }
+        
+        function updateMobileTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('mobileTime').textContent = `${hours}:${minutes}`;
+            document.getElementById('mobileJam').textContent = `${hours}:${minutes}`;
+        }
+        
+        function setupLokasiCuaca() {
+            // Gunakan fungsi dari clock.js yang sudah ada
+            // Fungsi ini akan otomatis dijalankan oleh clock.js
+            // Kita hanya perlu update elemen mobile
+            
+            // Simulasi jika clock.js tidak berjalan
+            if (!document.getElementById('lokasi')) {
+                document.getElementById('mobileLokasi').textContent = "Jakarta, ID";
+                document.getElementById('mobileCuaca').textContent = "Cerah Berawan";
+                document.getElementById('mobileTemperature').textContent = "27°C";
+            }
+        }
+        
+        function setupBreakingSlider() {
+            const breakingSection = document.getElementById('breakingSliderMobile');
+            const sliderWrapper = document.getElementById('mobileSliderWrapper');
+            const sliderNav = document.getElementById('sliderNav');
+            
+            // Ambil data breaking dari script.js atau buat sendiri
+            const breakingData = [
+                ...(beritaData["hari-ini"] || []).slice(0, 3),
+                ...(beritaData["populer"] || []).slice(0, 2),
+                ...(beritaData["rekomendasi"] || []).slice(0, 2)
+            ];
+            
+            if (breakingData.length === 0) {
+                breakingSection.style.display = 'none';
+                return;
+            }
+            
+            breakingSection.style.display = 'block';
+            
+            // Clear existing
+            sliderWrapper.innerHTML = '';
+            sliderNav.innerHTML = '';
+            
+            // Add slider items
+            breakingData.forEach((item, index) => {
+                const sliderItem = document.createElement('div');
+                sliderItem.className = 'slider-item';
+                sliderItem.innerHTML = `
+                    <img src="${item.img}" alt="${item.judul}">
+                    <h4>${item.judul}</h4>
+                    <a href="berita.html?id=${item.id}" class="btn-news-mobile">Baca Berita</a>
+                `;
+                sliderWrapper.appendChild(sliderItem);
+                
+                // Add dot
+                const dot = document.createElement('div');
+                dot.className = `slider-dot ${index === 0 ? 'active' : ''}`;
+                dot.dataset.index = index;
+                dot.addEventListener('click', () => goToSlide(index));
+                sliderNav.appendChild(dot);
+            });
+            
+            // Auto slide
+            let currentSlide = 0;
+            const totalSlides = breakingData.length;
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            }
+            
+            function updateSlider() {
+                sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                // Update active dot
+                document.querySelectorAll('.slider-dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+            
+            function goToSlide(index) {
+                currentSlide = index;
+                updateSlider();
+            }
+            
+            // Auto slide every 5 seconds
+            let slideInterval = setInterval(nextSlide, 5000);
+            
+            // Pause on hover
+            breakingSection.addEventListener('mouseenter', () => clearInterval(slideInterval));
+            breakingSection.addEventListener('mouseleave', () => slideInterval = setInterval(nextSlide, 5000));
+        }
+        
+        // Fungsi untuk mendapatkan kategori berdasarkan ID (sama seperti di script.js)
+        function getKategoriMobile(id) {
+            if (id >= 1 && id <= 10) return "Hari Ini";
+            if (id >= 11 && id <= 20) return "Populer";
+            if (id >= 21 && id <= 30) return "Rekomendasi";
+            return "Lainnya";
+        }
+        
+        // Fungsi tampilkan berita untuk mobile
+        function tampilkanBeritaMobile(kategori) {
+            const newsList = document.getElementById('mobileNewsList');
+            const sectionTitle = document.getElementById('mobileSectionTitle');
+            
+            newsList.innerHTML = '';
+            
+            // Update active nav
+            document.querySelectorAll('.mobile-nav a').forEach(a => {
+                a.classList.remove('active');
+            });
+            document.querySelector(`.mobile-nav a[data-kategori="${kategori}"]`).classList.add('active');
+            
+            if (kategori === "semua") {
+                sectionTitle.textContent = "SEMUA BERITA";
+                
+                // Gabungkan semua berita
+                const semuaBerita = [
+                    ...(beritaData["hari-ini"] || []),
+                    ...(beritaData["populer"] || []),
+                    ...(beritaData["rekomendasi"] || [])
+                ];
+                
+                if (semuaBerita.length === 0) {
+                    newsList.innerHTML = "<p style='text-align:center; padding:20px; color:#666;'>Tidak ada berita tersedia.</p>";
+                    return;
+                }
+                
+                semuaBerita.forEach(item => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'news-item';
+                    newsItem.innerHTML = `
+                        <img src="${item.img}" alt="${item.judul}" class="news-img">
+                        <div class="news-content">
+                            <h3>${item.judul}</h3>
+                            <p class="news-deskripsi">${item.deskripsi}</p>
+                            <div class="news-meta">
+                                <span class="kategori-badge">${getKategoriMobile(item.id)}</span>
+                                <a href="berita.html?id=${item.id}" class="btn-news-mobile">Baca</a>
+                            </div>
+                        </div>
+                    `;
+                    newsList.appendChild(newsItem);
+                });
+            } else {
+                const data = beritaData[kategori];
+                
+                if (!data || data.length === 0) {
+                    sectionTitle.textContent = "TIDAK ADA BERITA";
+                    newsList.innerHTML = "<p style='text-align:center; padding:20px; color:#666;'>Tidak ada berita untuk kategori ini.</p>";
+                    return;
+                }
+                
+                sectionTitle.textContent = kategori.replace("-", " ").toUpperCase();
+                
+                data.forEach(item => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'news-item';
+                    newsItem.innerHTML = `
+                        <img src="${item.img}" alt="${item.judul}" class="news-img">
+                        <div class="news-content">
+                            <h3>${item.judul}</h3>
+                            <p class="news-deskripsi">${item.deskripsi}</p>
+                            <div class="news-meta">
+                                <span class="kategori-badge">${getKategoriMobile(item.id)}</span>
+                                <a href="berita.html?id=${item.id}" class="btn-news-mobile">Baca</a>
+                            </div>
+                        </div>
+                    `;
+                    newsList.appendChild(newsItem);
+                });
+            }
+        }
+        
+        // Setup event listeners untuk mobile
+        function setupMobileListeners() {
+            // Mode gelap/terang
+            const modeBtn = document.getElementById('mobileModeBtn');
+            const logoRed = document.querySelector('.logo-mobile .red');
+            
+            modeBtn.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                
+                if (document.body.classList.contains('dark-mode')) {
+                    modeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                    if (logoRed) logoRed.style.color = '#ff3333';
+                } else {
+                    modeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                    if (logoRed) logoRed.style.color = '#e60000';
+                }
+            });
+            
+            // Navigation kategori
+            document.querySelectorAll('.mobile-nav a').forEach(menu => {
+                menu.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const kategori = this.getAttribute('data-kategori');
+                    tampilkanBeritaMobile(kategori);
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('mobileSearchInput');
+            const searchBtn = document.getElementById('mobileSearchBtn');
+            
+            function performMobileSearch() {
+                const keyword = searchInput.value.toLowerCase().trim();
+                
+                if (keyword === "") {
+                    tampilkanBeritaMobile("hari-ini");
+                    return;
+                }
+                
+                // Search in all news
+                const semuaData = [
+                    ...(beritaData["hari-ini"] || []),
+                    ...(beritaData["populer"] || []),
+                    ...(beritaData["rekomendasi"] || [])
+                ];
+                
+                const hasil = semuaData.filter(item =>
+                    item.judul.toLowerCase().includes(keyword) ||
+                    item.deskripsi.toLowerCase().includes(keyword)
+                );
+                
+                const newsList = document.getElementById('mobileNewsList');
+                const sectionTitle = document.getElementById('mobileSectionTitle');
+                
+                newsList.innerHTML = '';
+                sectionTitle.textContent = `HASIL: "${keyword}"`;
+                
+                if (hasil.length === 0) {
+                    newsList.innerHTML = `<p style='text-align:center; padding:20px; color:#666;'>Tidak ditemukan berita untuk "${keyword}".</p>`;
+                    return;
+                }
+                
+                hasil.forEach(item => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'news-item';
+                    newsItem.innerHTML = `
+                        <img src="${item.img}" alt="${item.judul}" class="news-img">
+                        <div class="news-content">
+                            <h3>${item.judul}</h3>
+                            <p class="news-deskripsi">${item.deskripsi}</p>
+                            <div class="news-meta">
+                                <span class="kategori-badge">${getKategoriMobile(item.id)}</span>
+                                <a href="berita.html?id=${item.id}" class="btn-news-mobile">Baca</a>
+                            </div>
+                        </div>
+                    `;
+                    newsList.appendChild(newsItem);
+                });
+            }
+            
+            searchBtn.addEventListener('click', performMobileSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performMobileSearch();
+                }
+            });
+            
+            // Bottom navigation
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Update active state
+                    document.querySelectorAll('.bottom-nav .nav-item').forEach(nav => {
+                        nav.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Handle navigation
+                    const navId = this.id;
+                    
+                    if (navId === 'navHome' || navId === 'navPopular') {
+                        // Scroll to top
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        
+                        if (navId === 'navPopular') {
+                            tampilkanBeritaMobile('populer');
+                        }
+                    } else if (navId === 'navSearch') {
+                        // Focus on search input
+                        searchInput.focus();
+                    } else {
+                        // Simulate other features
+                        alert(`Fitur ${this.querySelector('span').textContent} akan segera hadir!`);
+                    }
+                });
+            });
+            
+            // See all button
+            document.getElementById('seeAllBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                tampilkanBeritaMobile('semua');
+            });
+        }
+        
+        // Integrasi dengan clock.js yang sudah ada
+        // Override fungsi updateJam untuk update mobile juga
+        const originalUpdateJam = window.updateJam;
+        if (originalUpdateJam) {
+            window.updateJam = function() {
+                originalUpdateJam();
+                updateMobileTime();
+            };
+        }
+    </script>
+</body>
+</html>
